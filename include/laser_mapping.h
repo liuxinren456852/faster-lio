@@ -106,6 +106,9 @@ class LaserMapping {
     common::VV4F corr_pts_;                           // inlier pts
     common::VV4F corr_norm_;                          // inlier plane norms
     pcl::VoxelGrid<PointType> voxel_scan_;            // voxel filter for current scan
+    std::vector<float> residuals_;                    // point-to-plane residuals
+    std::vector<bool> point_selected_surf_;           // selected points
+    common::VV4F plane_coef_;                         // plane coeffs
 
     /// ros pub and sub stuffs
     ros::Subscriber sub_pcl_;
@@ -115,6 +118,8 @@ class LaserMapping {
     ros::Publisher pub_laser_cloud_effect_world_;
     ros::Publisher pub_odom_aft_mapped_;
     ros::Publisher pub_path_;
+    std::string tf_imu_frame_;
+    std::string tf_world_frame_;
 
     std::mutex mtx_buffer_;
     std::deque<double> time_buffer_;

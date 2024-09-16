@@ -18,6 +18,28 @@ Below is the FPS tested with avia and velodyne 32 spinning lidar from FastLIO2 a
 </div>
 
 # Quick Start
+## Docker 
+```bash
+git clone 
+cd faster-lio/docker
+docker-compose build
+docker-compose up
+```  
+Before entering `docker-compose up` command, you should enter `xhost +local:docker` in the local terminal to enable docker to communicate with Xserver on the host.  
+
+update `bag` file path in `.env`, then run.
+```bash
+catkin_make
+source devel/setup.bash
+roslaunch faster_lio mapping_avia.launch
+```
+Open another terminal, then play `bag` file.
+
+### issue
+`QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-root'` 
+
+**Don't worry, it can run normally**. you can run `source /etc/profile&& source /opt/ros/noetic/setup.bash && source devel/setup.bash`, then `run roslaunch xxx`
+
 
 ## Dependency
 
@@ -83,6 +105,7 @@ tar -xvf tbb2018_20170726oss_lin.tgz
 - specify the tbb directory in the cmake stage:
 
 ```bash
+cd ../build
 cmake .. -DCUSTOM_TBB_DIR=`pwd`/../thirdparty/tbb2018_20170726oss
 ```
 
@@ -94,6 +117,10 @@ Download the avia/nclt bags in your computer:
 
 - [avia bags](https://drive.google.com/drive/folders/1YL5MQVYgAM8oAWUm7e3OGXZBPKkanmY1?usp=sharing)
 - [nclt bags](https://drive.google.com/drive/folders/1VBK5idI1oyW0GC_I_Hxh63aqam3nocNK)
+
+The link of the dataset is outdated.  Please use the NCLT bags in SAD datasets: 
+BaiduYun: https://pan.baidu.com/s/1ELOcF1UTKdfiKBAaXnE8sQ?pwd=feky access code: feky
+OneDrive：https://1drv.ms/u/s!AgNFVSzSYXMahcEZejoUwCaHRcactQ?e=YsOYy2
 
 ## Run FasterLIO
 
@@ -144,7 +171,21 @@ Online mode could be launched through rosrun/roslaunch/directly call. We use ros
 # Acknowledgements
 
 - We thank the authors of [FastLIO2](https://github.com/hku-mars/FAST_LIO), LOAM for their great jobs.
-- Please cite our work if you are using FasterLIO in academic work. Bibtex citation will be privided soon.
+- Please cite our work if you are using FasterLIO in academic work. Bibtex is provided here (early-access version):
+
+```
+@ARTICLE{9718203,  
+author={Bai, Chunge and Xiao, Tao and Chen, Yajie and Wang, Haoqian and Zhang, Fang and Gao, Xiang},  
+journal={IEEE Robotics and Automation Letters},   
+title={Faster-LIO: Lightweight Tightly Coupled Lidar-Inertial Odometry Using Parallel Sparse Incremental Voxels},   
+year={2022},  
+volume={7},  
+number={2},  
+pages={4861-4868},  
+doi={10.1109/LRA.2022.3152830}}
+```
+
+
 - This work is supported by Idriver+ Technologies Co. Ltd.
 
 # Known Issues
